@@ -3,15 +3,15 @@ module.exports = {
   content: [
     "./App.{js,jsx,ts,tsx}",
     "./src/screens/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        dark: '#1e1e1e',
+        dark: '#36383e',
         tgreen: '#05704f',
-        darkheader: '#242529'
+        darkheader: '#242529',
+        cardcolor: '#2B2B2B'
       }
     },
   },

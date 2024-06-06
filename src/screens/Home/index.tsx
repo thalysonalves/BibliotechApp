@@ -1,4 +1,5 @@
 import { View, Text, Image, TextInput, StatusBar } from "react-native";
+import { Card } from "../../components/Card";
 
 export const Home = () => {
   return (
@@ -7,7 +8,7 @@ export const Home = () => {
     >
       <StatusBar barStyle="light-content"/>
       <View
-        className="w-full h-28 items-center border-2 border-solid border-red-500 bg-darkheader"
+        className="w-full h-28 justify-center items-center bg-darkheader"
       >
         <Image
           className="" 
@@ -15,19 +16,24 @@ export const Home = () => {
         />
       </View>
       <View 
-        className="flex-1 border-2 border-solid border-yellow-500"
+        className="flex-1"
       >
-        <Text
-          className="text-white"
-        >
-          Home
-        </Text>
         <TextInput
-          className="w-40 h-10 bg-white text-center text-lg rounded-lg ml-80"
+          className="w-40 h-10 bg-white text-center text-lg rounded-lg absolute right-3 top-3"
           placeholder='Buscar um livro'
           placeholderTextColor="#000000"
         >
         </TextInput>
+        <View
+          className="absolute top-16 left-3"
+        >
+          <Text
+            className="text-white text-2xl mb-2"
+          >
+            Mais lidos do mês
+          </Text>
+          <Card />
+        </View>
       </View>
     </View>
   );
