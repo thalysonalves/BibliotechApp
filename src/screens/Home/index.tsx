@@ -1,23 +1,16 @@
 import React, { useState } from "react";
-import { View, Text, Image, TextInput, StatusBar, Button, ScrollView, FlatList } from "react-native";
-import { Card } from "../../components/Card";
-import { searchBooks } from "../Login/googleBooks";
+import { View, Text, Image, TextInput, StatusBar, Pressable } from "react-native";
+import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../../routes/routes';
+
+
+type HomeScreenNavigationProp = NavigationProp<RootStackParamList, 'Home'>;
+
 
 export const Home = () => {
-  const [query, setQuery] = useState('');
-  const [books, setBooks] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
-  const handleSearch = async () => {
-    setError(null); // Reset any previous error
-    const results = await searchBooks(query);
-    if (results && results.length > 0) {
-      setBooks(results);
-    } else {
-      setBooks([]);
-      setError('No books found');
-    }
-  };
   return (
     <View
       className="flex-1 bg-dark"
@@ -34,18 +27,12 @@ export const Home = () => {
       <View 
         className="flex-1"
       >
-        <TextInput
-          className="w-40 h-10 bg-white text-center text-lg text-black rounded-lg absolute right-3 top-9"
-          placeholder='Buscar um livro'
-          placeholderTextColor="#000000"
-          onChangeText={setQuery}
-          value={query}
+        <Pressable
+          className="w-12 h-12 items-center justify-center absolute top-3 right-3 bg-tgreen rounded-xl"
+          onPress={() => navigation.navigate('Search')}
         >
-        </TextInput>
-        <Button 
-          title="Buscar" 
-          onPress={handleSearch}
-          />
+          <Icon name="search" size={35} color={'#ffffff'} />
+        </Pressable>
         <View
           className="absolute top-16 left-3"
         >
@@ -54,14 +41,6 @@ export const Home = () => {
           >
             Mais lidos do mês
           </Text>
-          {error && <Text className="text-red-500">{error}</Text>}
-          {books.length > 0 && books[0] && books[0].volumeInfo && (
-            <Card
-              title={books[0].volumeInfo.title}
-              description={books[0].volumeInfo.description}
-              imageUrl={books[0].volumeInfo.imageLinks?.thumbnail}
-           />
-         )}
         </View>
       </View>
     </View>
