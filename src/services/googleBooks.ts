@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GOOGLE_BOOKS_URL, API_KEY } from '../../services/APIconfig';
+import { GOOGLE_BOOKS_URL, API_KEY } from './APIconfig';
 
 export const searchBooks = async (query: string) => {
   try {

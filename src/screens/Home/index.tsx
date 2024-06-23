@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, TextInput, StatusBar, Pressable } from "react-native";
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../routes/routes';
+import { Card } from "../../components/Card";
+import { api } from "../../services/axiosConfig";
 
 
 type HomeScreenNavigationProp = NavigationProp<RootStackParamList, 'Home'>;
@@ -10,6 +12,21 @@ type HomeScreenNavigationProp = NavigationProp<RootStackParamList, 'Home'>;
 
 export const Home = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
+  const [books, setBooks] = useState<any[]>([])
+
+  const fetchBooks = async () => {
+    try {
+      const { data } = await api.get('/book')
+
+      setBooks(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchBooks()
+  }, []);
 
   return (
     <View
@@ -41,6 +58,12 @@ export const Home = () => {
           >
             Mais lidos do mês
           </Text>
+
+          {books.map(item => (
+            <View key={item.id}>
+              <Text>{item.name}</Text>
+            </View>
+          ))}
         </View>
       </View>
     </View>

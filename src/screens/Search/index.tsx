@@ -1,9 +1,10 @@
-import { View, Text, TextInput, Button } from "react-native";
-import { searchBooks } from "../Login/googleBooks";
+import { View, Text, TextInput, Button, Pressable } from "react-native";
+import { searchBooks } from "../../services/googleBooks";
 import { useState } from "react";
 import { Card } from "../../components/Card";
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../routes/routes';
+import Icon from "react-native-vector-icons/Feather";
 
 type SearchScreenNavigationProp = NavigationProp<RootStackParamList, 'Search'>;
 
@@ -28,20 +29,22 @@ export const Search = () => {
   
   return (
     <View
-      className="flex-1 items-center bg-dark"
+      className="flex-1 bg-dark"
     >
       <TextInput
-          className="w-10/12 h-12 bg-white text-center text-lg text-black rounded-lg"
+          className="w-9/12 h-12 bg-white text-center text-lg text-black m-5 rounded-lg"
           placeholder='Buscar um livro'
           placeholderTextColor="#000000"
           onChangeText={setQuery}
           value={query}
         >
         </TextInput>
-        <Button 
-          title="Buscar" 
+        <Pressable
+          className="justify-center items-center absolute right-6 mt-5 w-12 h-12 bg-tgreen rounded-xl"
           onPress={handleSearch}
-        />
+        >
+          <Icon name="search" size={35} color={'#ffffff'} />
+        </Pressable>
         {error && <Text className="text-red-500">{error}</Text>}
           {books.length > 0 && books[0] && books[0].volumeInfo && (
             <Card
