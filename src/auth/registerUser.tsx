@@ -18,7 +18,7 @@ interface RegisterUserResponse {
 
 const registerUser = async (userData: RegisterUserRequest): Promise<RegisterUserResponse> => {
   try {
-    const response: AxiosResponse<RegisterUserResponse> = await axios.post('http://localhost:5000/student', userData);
+    const response: AxiosResponse<RegisterUserResponse> = await axios.post('http://192.168.0.107:5000/student', userData);
 
     const { token } = response.data;
 

@@ -33,9 +33,9 @@ export const Cadastro = () => {
     }
 
     try {
-      await dispatch(registerUser({ full_name: username, password, student_class, grade })).unwrap();
+      await dispatch(registerUser({ full_name: username, password: password, student_class: student_class, grade: grade })).unwrap();
       
-      const loginResponse = await dispatch(loginUser({ full_name: username, password })).unwrap();
+      const loginResponse = await dispatch(loginUser({ full_name: username, password: password })).unwrap();
       
       if (loginResponse) {
         await AsyncStorage.setItem('token', loginResponse);
