@@ -14,18 +14,27 @@ export const Login = () => {
 
   const handleLogin = async () => {
     try {
+      console.log('Iniciando login');
+      
       const response = await api.post('/student-login', {
         full_name: fullName,
         password: password,
       });
 
+      console.log('Resposta da API:', response.data);
+
       const { token } = response.data;
 
+      if (!token) {
+        throw new Error('Token não encontrado na resposta');
+      }
+
       await AsyncStorage.setItem('token', token);
+      console.log('Token armazenado no AsyncStorage:', token);
 
       navigation.navigate('Home');
     } catch (error) {
-      console.error(error);
+      console.error('Erro no login:', error);
       Alert.alert('Erro de Login', 'Usuário ou senha inválidos');
     }
   };
